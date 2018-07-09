@@ -4,11 +4,15 @@
 
 <% data.devices.forEach(function (e, i) { %>
 <a class="item card col4" href="device/<%= i %>">
-    <div class="column name"><%= e.name %></div>
+    <div class="name" float="left"><%= e.name %></div>
+    <% if (e.battery >= 0) { %>
+    <div class="battery" float="right"><%= e.battery %>%</div>
+    <% } %>
+    <hr class="clear">
     <% if (e.status === "on") { %>
-    <div class="column status running">ON (<%= e.battery %>%)</div>
+    <div class="status running">ON</div>
     <% } else { %>
-    <div class="column status">OFF</div>
+    <div class="status">OFF</div>
     <% } %>
 </a>
 <% }); %>
@@ -18,7 +22,7 @@
 .item.card:hover {box-shadow:4px 4px 0 rgba(0,0,0,0.12), 4px 4px 8px rgba(0,0,0,0.24);}
 .item.card:nth-child(4n+1) {margin-right:0;}
 
-.item .column.name {color:rgba(0,0,0,0.56);}
-.column.status {color:#f44336;}
-.column.status.running {color:#8bc34a;}
+.item .name {color:rgba(0,0,0,0.56);}
+.item .status {color:#f44336;}
+.item .status.running {color:#8bc34a;}
 </style>
