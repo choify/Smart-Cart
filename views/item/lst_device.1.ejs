@@ -1,0 +1,31 @@
+<!--
+index.ejs
+    num = 장치 개수
+
+-->
+
+<div class="card device" float="left">
+    <div class="subject">
+        <div class="column" column="1">번호</div>
+        <div class="column" column="2">이름</div>
+        <div class="column" column="3">상태</div>
+    </div>
+    <% for(var i = 0; i < num; i++) { %>
+    <a class="item" href="device/<%= i %>">
+        <div class="column" column="1"><%= i + 1 %></div>
+        <div class="column" column="2"><%= "장치 " + i %></div>
+        <div class="column" column="3">꺼짐</div>
+    </a>
+    <% } %>
+    <style>
+    .device div {box-sizing:border-box;}
+    .column {display:inline-block; padding:0 16px; height:64px; line-height:64px;}
+    .subject .column { height:48px; line-height:48px; font-size:12pt; color:rgba(0,0,0,0.62);}
+    .device .column[column="1"] {width:80px;}
+    .device .column[column="2"] {width:240px;}
+    .device .column[column="3"] {width:360px;}
+
+    .item {display:block; text-decoration:none;  color:rgba(0,0,0,0.82);}
+    .item:hover {background:rgba(0,0,0,0.08);}
+    </style>
+</div>

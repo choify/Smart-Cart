@@ -1,0 +1,39 @@
+<!-- router/main.js
+
+    title: "장치 화면",
+    index: req.params.idx,
+    data: { devices: [ ... ]}
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/style.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+<%
+    var total = data.devices.length;
+    var on = 0;
+    data.devices.forEach(function(e) {
+        if (e.status === "on")
+            on += 1;
+    });
+%>
+    <nav>
+        <p class="title" float="left"><%= title %></p>
+    </nav>
+    <main>
+        <div class="content">
+            <div class="info">
+                <div class="work">작동중 : <%= on %> / <%= total %></div>
+            </div>
+            <%- include("item/lst_device.ejs", {data: data}) %>
+        </div>
+    </main>
+</body>
+</html>
