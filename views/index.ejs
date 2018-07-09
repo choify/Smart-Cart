@@ -30,7 +30,8 @@
     <main>
         <div class="content">
             <div class="info">
-                <div class="work">작동중 : <%= on %> / <%= total %></div>
+                <div class="title" float="left">장치 목록</div>
+                <div class="work" float="right">작동중 : <%= on %> / <%= total %></div>
             </div>
             <%- include("item/lst_device.ejs", {data: data}) %>
         </div>
