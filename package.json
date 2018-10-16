@@ -10,8 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/opnay/ProjectServer.git"
   },
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/opnay/ProjectServer/issues"
   },
-  "homepage": "https://github.com/opnay/ProjectServer#readme"
+  "homepage": "https://github.com/opnay/ProjectServer#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
