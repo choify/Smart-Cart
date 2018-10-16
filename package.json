@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "My Project Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opnay/ProjectServer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/opnay/ProjectServer/issues"
+  },
+  "homepage": "https://github.com/opnay/ProjectServer#readme"
+}
