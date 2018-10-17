@@ -1,4 +1,9 @@
-module.exports = function(app) {
+/*
+ *  app     express()
+ *  conn    mysql.createConnection()
+ *          conn.execute(sql, func(err, row, fields))
+ */
+module.exports = function(app, conn) {
     var data = { devices: [
         // {이름, 상태, 배터리}
         {name: "장치 1", status: "on", battery: 100},
@@ -10,6 +15,7 @@ module.exports = function(app) {
         {name: "장치 7", status: "on", battery: 42},
         {name: "장치 8", status: "off", battery: -1}
     ]};
+
     app.get('/', function(req, res) {
         res.render('index', {
             title: "메인 화면",
@@ -28,5 +34,18 @@ module.exports = function(app) {
 
     app.get('/about', function(req, res) {
         res.render('about.html');
+    });
+
+    app.get('/sensor', function(req,res) {
+        let json;
+        conn.execute(
+            'SELECT ID,DATE_FORMAT(DATE, "%Y-%m-%d %H:%i:%S") as DATE,value as VALUE FROM data_sensor',
+            function (err, result, fields) {
+                json = JSON.stringify(result);
+
+                res.contentType('application/json');
+                res.send(json);
+            }
+        )
     });
 };
