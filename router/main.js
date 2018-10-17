@@ -48,4 +48,15 @@ module.exports = function(app, conn) {
             }
         )
     });
+
+    app.get('/insert_data/:num', function (req,res) {
+        console.log('/insert_data/' + req.params.num);
+        conn.execute(
+            'INSERT INTO data_sensor(VALUE) VALUE(' + req.params.num + ');',
+            function (err, result, fields) {
+                if (err) console.log(err);
+                res.send('1');
+            }
+        )
+    });
 };
