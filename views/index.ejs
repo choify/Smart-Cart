@@ -28,6 +28,7 @@
             xhttp.open("GET", "/sensor", true);
             xhttp.send();
         }
+        window.setInterval(getLastData, 1000);
     </script>
 </head>
 <body>
