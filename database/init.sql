@@ -7,6 +7,22 @@ CREATE TABLE data_sensor (
     PRIMARY KEY (ID)
 );
 
+CREATE TABLE data_sensor3 (
+    ID INT NOT NULL AUTO_INCREMENT,
+    DATE DATETIME DEFAULT CURRENT_TIMESTAMP,
+    TEMP TEXT NOT NULL,     -- 온도
+    HUMI TEXT NOT NULL,     -- 습도
+    MICRO TEXT NOT NULL,    -- 미세먼지
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE data_sensor_moving (
+    ID INT NOT NULL AUTO_INCREMENT,
+    DATE DATETIME DEFAULT CURRENT_TIMESTAMP,
+    VALUE BOOL,     -- 움직임 감지 센서
+    PRIMARY KEY (ID)
+);
+
 -- SELECT
 --     ID,
 --     DATE_FORMAT(DATE, "%Y-%m-%d %H:%i:%S") as DATE,
