@@ -39,7 +39,7 @@ module.exports = function(app, conn) {
     app.get('/sensor', function(req,res) {
         let json;
         conn.execute(
-            'SELECT ID,DATE_FORMAT(DATE, "%Y-%m-%d %H:%i:%S") as DATE,value as VALUE FROM data_sensor',
+            'SELECT ID,DATE_FORMAT(DATE, "%Y-%m-%d %H:%i:%S") as DATE,TEMP,HUMI,MICRO FROM data_sensor3',
             function (err, result, fields) {
                 json = JSON.stringify(result);
 

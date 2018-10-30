@@ -15,20 +15,27 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/style.css" />
     <script src="main.js"></script>
     <script>
-        function getLastData() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    let tmp = JSON.parse(xhttp.responseText);
-                    document.getElementById('sen-temp')
-                        .getElementsByClassName('value')[0]
-                        .innerText = tmp[tmp.length-1].VALUE;
-                }
-            };
-            xhttp.open("GET", "/sensor", true);
-            xhttp.send();
+function getLastData() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let tmp = JSON.parse(xhttp.responseText)[0];
+            console.log(tmp);
+            document.getElementById('sen-temp')
+                .getElementsByClassName('value')[0]
+                .innerText = tmp.TEMP + '℃';
+            document.getElementById('sen-humi')
+                .getElementsByClassName('value')[0]
+                .innerText = tmp.HUMI + '%';
+            document.getElementById('sen-micro')
+                .getElementsByClassName('value')[0]
+                .innerText = tmp.MICRO + '%';
         }
-        window.setInterval(getLastData, 1000);
+    };
+    xhttp.open("GET", "/sensor", true);
+    xhttp.send();
+}
+window.setInterval(getLastData, 1000);
     </script>
 </head>
 <body>
@@ -53,11 +60,11 @@
                     <div class="name">온도</div>
                     <div class="value">30℃</div>
                 </div>
-                <div class="item card col3">
+                <div id="sen-humi" class="item card col3">
                     <div class="name">습도</div>
                     <div class="value">30℃</div>
                 </div>
-                <div class="item card col3">
+                <div id="sen-micro" class="item card col3">
                     <div class="name">미세먼지</div>
                     <div class="value">30℃</div>
                 </div>
