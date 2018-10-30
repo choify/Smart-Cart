@@ -49,14 +49,23 @@ module.exports = function(app, conn) {
         )
     });
 
-    app.get('/insert_data/:num', function (req,res) {
-        console.log('/insert_data/' + req.params.num);
+    app.get('/insert/:temp/:humi/:micro', function (req, res) {
+        console.log('data_sensor3: 새 데이터 추가' +
+                    req.params.temp + ' / ' +
+                    req.params.humi + ' / ' +
+                    req.params.micro);
         conn.execute(
-            'INSERT INTO data_sensor(VALUE) VALUE(' + req.params.num + ');',
+            'INSERT INTO data_sensor3(TEMP,HUMI,MICRO) VALUE(' +
+                req.params.temp + ',' +
+                req.params.humi + ',' +
+                req.params.micro + ');',
             function (err, result, fields) {
-                if (err) console.log(err);
+                if (err) {
+                    console.log(err);
+                    res.send('0');
+                }
                 res.send('1');
             }
-        )
+        );
     });
 };
