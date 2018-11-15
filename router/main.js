@@ -29,7 +29,7 @@ module.exports = function(app, conn) {
     app.get('/sensor', function(req,res) {
         let json;
         conn.execute(
-            'SELECT ID,DATE_FORMAT(DATE, "%Y-%m-%d %H:%i:%S") as DATE,TEMP,HUMI,MICRO FROM data_sensor3',
+            'SELECT ID,DATE_FORMAT(DATE, "%Y-%m-%d %H:%i:%S") as DATE,TEMP,HUMI,MICRO FROM data_sensor3 ORDER BY DATE DESC LIMIT 10',
             function (err, result, fields) {
                 json = JSON.stringify(result);
 
@@ -40,7 +40,7 @@ module.exports = function(app, conn) {
     });
 
     app.get('/insert/:temp/:humi/:micro', function (req, res) {
-        console.log('data_sensor3: 새 데이터 추가' +
+        console.log('data_sensor3: 새 데이터 추가 ' +
                     req.params.temp + ' / ' +
                     req.params.humi + ' / ' +
                     req.params.micro);

@@ -1,8 +1,8 @@
 'use strict'
 const dbconfig = {
     host     : 'localhost',
-    user     : 'project',
-    password : 'projectPWD',
+    user     : 'root',
+    password : '1212',
     database : 'projectdb'
 };
 

@@ -10,9 +10,9 @@ CREATE TABLE data_sensor (
 CREATE TABLE data_sensor3 (
     ID INT NOT NULL AUTO_INCREMENT,
     DATE DATETIME DEFAULT CURRENT_TIMESTAMP,
-    TEMP TEXT NOT NULL,     -- 온도
-    HUMI TEXT NOT NULL,     -- 습도
-    MICRO TEXT NOT NULL,    -- 미세먼지
+    TEMP INT NOT NULL,     -- 온도
+    HUMI INT NOT NULL,     -- 습도
+    MICRO INT NOT NULL,    -- 미세먼지
     PRIMARY KEY (ID)
 );
 

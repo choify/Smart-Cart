@@ -13,37 +13,10 @@
     <title><%= title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@4.13.0/build/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/taucharts@2/dist/taucharts.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/taucharts@2/dist/taucharts.min.css">
     <script src="main.js"></script>
-    <script>
-function getLastData() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            let tmp = JSON.parse(xhttp.responseText)[0];
-            document.getElementById('sen-temp')
-                .getElementsByClassName('value')[0]
-                .innerText = tmp.TEMP + '℃';
-            document.getElementById('sen-humi')
-                .getElementsByClassName('value')[0]
-                .innerText = tmp.HUMI + '%';
-            document.getElementById('sen-micro')
-                .getElementsByClassName('value')[0]
-                .innerText = tmp.MICRO + '%';
-        }
-    };
-    xhttp.open("GET", "/sensor", true);
-    xhttp.send();
-}
-window.setInterval(getLastData, 1000);
-    </script>
-    <style>
-    .item.card {display:inline-block; padding:16px; box-sizing:border-box; color:rgba(0,0,0,0.82); text-decoration:none;}
-    .item.card:hover {box-shadow:0 2px 4px rgba(0,0,0,0.12), 2px 2px 8px rgba(0,0,0,0.24);}
-
-    .item .name {color:rgba(0,0,0,0.56);}
-    .item .status {color:#f44336;}
-    .item .status.running {color:#8bc34a;}
-    </style>
 </head>
 <body>
     <nav>
@@ -69,9 +42,97 @@ window.setInterval(getLastData, 1000);
                 </div>
             </div>
         </div>
-        <div class="content">
-            수정바람
+        <div class="content card">
+            <div class='chart temp'></div>
+            <div class='chart humi'></div>
+            <div class='chart micro'></div>
         </div>
     </main>
+
+
+    <script>
+        // 초기화는 더미데이터
+        var data = [{
+            DATE: "2018-11-15 18:06:27",
+            HUMI: 20,
+            ID: 1,
+            MICRO: 20,
+            TEMP: 20
+        }];
+        var chartTemp = new Taucharts.Chart({
+            data: data,
+            type: 'line',           
+            x: 'DATE',
+            y: 'TEMP',
+            color: 'type',
+            plugins: [
+                Taucharts.api.plugins.get('tooltip')()
+            ]
+        });
+        var chartHumi = new Taucharts.Chart({
+            data: data,
+            type: 'line',           
+            x: 'DATE',
+            y: 'HUMI',
+            color: 'type',
+            plugins: [
+                Taucharts.api.plugins.get('tooltip')()
+            ]
+        });
+        var chartMicro = new Taucharts.Chart({
+            data: data,
+            type: 'line',           
+            x: 'DATE',
+            y: 'MICRO',
+            color: 'type',
+            plugins: [
+                Taucharts.api.plugins.get('tooltip')()
+            ]
+        });
+        
+        function updateData() {
+            document.getElementById('sen-temp')
+                .getElementsByClassName('value')[0]
+                .innerText = data[0].TEMP + '℃';
+            document.getElementById('sen-humi')
+                .getElementsByClassName('value')[0]
+                .innerText = data[0].HUMI + '%';
+            document.getElementById('sen-micro')
+                .getElementsByClassName('value')[0]
+                .innerText = data[0].MICRO + '%';
+
+            if (chartTemp._target != undefined)
+                chartTemp.setData(data);
+            if (chartHumi._target != undefined)
+                chartHumi.setData(data);
+            if (chartMicro._target != undefined)
+                chartMicro.setData(data);
+        }
+
+        function getLastData() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let tmp = JSON.parse(xhttp.responseText);
+                    if (tmp.length != 0) {
+                        data = tmp;
+                        updateData();
+                    }
+                }
+            };
+            xhttp.open("GET", "/sensor", true);
+            xhttp.send();
+        }
+        window.setInterval(getLastData, 5000);
+        
+        // document.getElementById('chart').innerHTML = '';
+        window.onload = function () {
+            getLastData();
+            chartTemp.renderTo('.chart.temp');
+            chartHumi.renderTo('.chart.humi');
+            chartMicro.renderTo('.chart.micro');
+            updateData();
+        }
+    </script>
 </body>
 </html>
