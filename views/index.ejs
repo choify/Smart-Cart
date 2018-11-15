@@ -2,7 +2,7 @@
 
     title: "장치 화면",
     index: req.params.idx,
-    data: { devices: [ ... ]}
+    data: data
 -->
 
 <!DOCTYPE html>
@@ -46,14 +46,6 @@ window.setInterval(getLastData, 1000);
     </style>
 </head>
 <body>
-<%
-    var total = data.devices.length;
-    var on = 0;
-    data.devices.forEach(function(e) {
-        if (e.status === "on")
-            on += 1;
-    });
-%>
     <nav>
         <p class="title" float="left"><%= title %></p>
     </nav>
