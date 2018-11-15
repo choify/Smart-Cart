@@ -36,6 +36,14 @@ function getLastData() {
 }
 window.setInterval(getLastData, 1000);
     </script>
+    <style>
+    .item.card {display:inline-block; padding:16px; box-sizing:border-box; color:rgba(0,0,0,0.82); text-decoration:none;}
+    .item.card:hover {box-shadow:0 2px 4px rgba(0,0,0,0.12), 2px 2px 8px rgba(0,0,0,0.24);}
+
+    .item .name {color:rgba(0,0,0,0.56);}
+    .item .status {color:#f44336;}
+    .item .status.running {color:#8bc34a;}
+    </style>
 </head>
 <body>
 <%
@@ -70,11 +78,7 @@ window.setInterval(getLastData, 1000);
             </div>
         </div>
         <div class="content">
-            <div class="info">
-                <div class="title" float="left">장치 목록</div>
-                <div class="work" float="right">작동중 : <%= on %> / <%= total %></div>
-            </div>
-            <%- include("item/lst_device.ejs", {data: data}) %>
+            수정바람
         </div>
     </main>
 </body>
